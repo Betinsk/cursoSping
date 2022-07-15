@@ -1,8 +1,12 @@
 package com.betinsk.mc.domain;
 
+import javax.persistence.Entity;
+
 import com.betinsk.mc.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento {
+	private static final long serialVersionUID = 1L;
 	
 	private Integer numeroDeParcelas;
 
@@ -10,8 +14,8 @@ public class PagamentoComCartao extends Pagamento {
 
 	}
 
-	public PagamentoComCartao(Integer id, EstadoPagamento estado, Integer numeroDeParcelas) {
-		super(id, estado);
+	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
+		super(id, estado, pedido );
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
 
