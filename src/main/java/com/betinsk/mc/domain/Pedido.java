@@ -2,6 +2,8 @@ package com.betinsk.mc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,6 +34,9 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
+	
+	
+	
 	
 	public Pedido() {
 
@@ -87,6 +92,8 @@ public class Pedido implements Serializable{
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,7 +118,8 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+
 	
 	
 }
