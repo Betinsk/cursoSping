@@ -29,7 +29,7 @@ private static final long serialVersionUID = 1L;
 	private String name;
 	private Double price;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
 	inverseJoinColumns = @JoinColumn(name = "categoria_id"))
