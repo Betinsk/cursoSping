@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.betinsk.mc.domain.Categoria;
 import com.betinsk.mc.repositories.CategoriaRepository;
+import com.betinsk.mc.resources.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
