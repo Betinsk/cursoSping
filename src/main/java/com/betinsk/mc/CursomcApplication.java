@@ -13,6 +13,7 @@ import com.betinsk.mc.domain.Cidade;
 import com.betinsk.mc.domain.Cliente;
 import com.betinsk.mc.domain.Endereco;
 import com.betinsk.mc.domain.Estado;
+import com.betinsk.mc.domain.ItemPedido;
 import com.betinsk.mc.domain.Pagamento;
 import com.betinsk.mc.domain.PagamentoComBoleto;
 import com.betinsk.mc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.betinsk.mc.repositories.CidadeRepository;
 import com.betinsk.mc.repositories.ClienteRepository;
 import com.betinsk.mc.repositories.EnderecoRepository;
 import com.betinsk.mc.repositories.EstadoRepository;
+import com.betinsk.mc.repositories.ItemPedidoRepository;
 import com.betinsk.mc.repositories.PagamentoRepository;
 import com.betinsk.mc.repositories.PedidoRepository;
 import com.betinsk.mc.repositories.ProdutoRepository;
@@ -48,6 +50,9 @@ public class CursomcApplication implements CommandLineRunner {
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -116,7 +121,19 @@ public class CursomcApplication implements CommandLineRunner {
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 		
 		
-		
+	 ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+	 ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+	 ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+	 
+	 ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+	 ped2.getItens().addAll(Arrays.asList(ip3));
+	 
+	 p1.getItens().addAll(Arrays.asList(ip1));
+	 p2.getItens().addAll(Arrays.asList(ip3));
+	 p3.getItens().addAll(Arrays.asList(ip2));
+	 
+	 itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
+	 
 		
 	}
 
