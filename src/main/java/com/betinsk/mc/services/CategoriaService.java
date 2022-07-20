@@ -34,5 +34,10 @@ public class CategoriaService {
 		find(obj.getId());
 		return categoriaRepository.save(obj);
 	}
+
+	public void delete(Integer id) {
+		find(id);
+		categoriaRepository.deleteById(id);
+	}
 	
 }
