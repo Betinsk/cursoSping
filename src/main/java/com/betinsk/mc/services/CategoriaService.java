@@ -3,11 +3,15 @@ package com.betinsk.mc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.betinsk.mc.domain.Categoria;
 import com.betinsk.mc.repositories.CategoriaRepository;
-import com.betinsk.mc.resources.exceptions.ObjectNotFoundException;
+import com.betinsk.mc.services.exceptions.DataIntegrityException;
+import com.betinsk.mc.services.exceptions.ObjectNotFoundException;
+
+
 
 @Service
 public class CategoriaService {
@@ -37,7 +41,12 @@ public class CategoriaService {
 
 	public void delete(Integer id) {
 		find(id);
-		categoriaRepository.deleteById(id);
+		try {
+			categoriaRepository.deleteById(id);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos"); 
+		}
 	}
 	
 }

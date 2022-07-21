@@ -1,4 +1,4 @@
-package com.betinsk.mc.resources.exceptions;
+package com.betinsk.mc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.betinsk.mc.domain.Cliente;
 import com.betinsk.mc.repositories.ClienteRepository;
-import com.betinsk.mc.resources.exceptions.ObjectNotFoundException;
+import com.betinsk.mc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
