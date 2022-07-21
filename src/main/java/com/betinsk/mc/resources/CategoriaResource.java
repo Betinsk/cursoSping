@@ -1,6 +1,8 @@
 package com.betinsk.mc.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.betinsk.mc.domain.Categoria;
+import com.betinsk.mc.dto.CategoriaDTO;
 import com.betinsk.mc.services.CategoriaService;
 
 @RestController
@@ -20,6 +23,15 @@ public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaService  categoriaService;
+	
+	//Method findAll
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		List<Categoria> list = categoriaService.findAll();
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	
 	//Method find by id
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -37,6 +49,7 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	//Method put
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
 	obj.setId(id);
@@ -44,6 +57,7 @@ public class CategoriaResource {
 	return ResponseEntity.noContent().build();
 	}
 	
+	//Method delete
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		categoriaService.delete(id);
