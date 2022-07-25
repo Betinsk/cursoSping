@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.betinsk.mc.domain.Categoria;
+import com.betinsk.mc.domain.Cliente;
 import com.betinsk.mc.dto.CategoriaDTO;
 import com.betinsk.mc.repositories.CategoriaRepository;
 import com.betinsk.mc.services.exceptions.DataIntegrityException;
@@ -40,8 +41,13 @@ public class CategoriaService {
 	
 	//Method for update
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return categoriaRepository.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return categoriaRepository.save(newObj);
+	}
+
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 
 	public void delete(Integer id) {
