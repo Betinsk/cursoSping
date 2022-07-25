@@ -22,7 +22,6 @@ public class ValidationError extends StandardError{
 		this.erros = erros;
 	}
 
-	
 	public void addError(String fieldName, String message) {
 		erros.add(new FieldMessage(fieldName, message));
 	}
