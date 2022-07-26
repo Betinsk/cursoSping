@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.betinsk.mc.domain.Cliente;
 import com.betinsk.mc.dto.ClienteDTO;
+import com.betinsk.mc.dto.ClienteNewDTO;
 import com.betinsk.mc.services.ClienteService;
 
 @RestController
@@ -45,7 +46,7 @@ public class ClienteResource {
 		
 		//Method post 
 		@RequestMapping(method=RequestMethod.POST)
-		public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+		public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 			Cliente obj = clienteService.fromDTO(objDto);
 			obj = clienteService.insert(obj);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

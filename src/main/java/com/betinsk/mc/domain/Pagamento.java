@@ -65,11 +65,11 @@ public abstract class Pagamento implements Serializable{
 		return true;
 	}
 
-	public EstadoPagamento getEstado() {
+	public Integer getEstado() {
 		return estado;
 	}
 
-	public void setEstado(EstadoPagamento estado) {
+	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 	
