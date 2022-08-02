@@ -26,7 +26,7 @@ private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
+	private String nome;
 	private Double price;
 	
 	@JsonIgnore
@@ -43,9 +43,9 @@ private static final long serialVersionUID = 1L;
 	public Produto() {
 	}
 
-	public Produto(Integer id, String name, Double price) {
+	public Produto(Integer id, String nome, Double price) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 		this.price = price;
 	}
 	
@@ -68,11 +68,11 @@ private static final long serialVersionUID = 1L;
 	}
 
 	public String getName() {
-		return name;
+		return nome;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.nome = nome;
 	}
 
 	public Double getPrice() {
