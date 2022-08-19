@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.betinsk.mc.services.DbService;
 
 @Configuration
-@Profile("dev")
+@Profile("test")
 public class TestConfig {
 	
 	

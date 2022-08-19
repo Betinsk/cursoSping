@@ -10,6 +10,7 @@ import com.betinsk.mc.domain.ItemPedido;
 import com.betinsk.mc.domain.PagamentoComBoleto;
 import com.betinsk.mc.domain.Pedido;
 import com.betinsk.mc.domain.enums.EstadoPagamento;
+import com.betinsk.mc.repositories.ClienteRepository;
 import com.betinsk.mc.repositories.ItemPedidoRepository;
 import com.betinsk.mc.repositories.PagamentoRepository;
 import com.betinsk.mc.repositories.PedidoRepository;
@@ -33,6 +34,9 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
 	
 	
 	public Pedido find(Integer id) { 
@@ -44,6 +48,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		
@@ -56,10 +61,12 @@ public class PedidoService {
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(produtoService.find(ip.getProduto().getId()).getPrice());
+			ip.setProduto(produtoService.find(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPrice());
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		return obj;
 	}
 	
