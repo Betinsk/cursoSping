@@ -20,6 +20,7 @@ import com.betinsk.mc.domain.PagamentoComCartao;
 import com.betinsk.mc.domain.Pedido;
 import com.betinsk.mc.domain.Produto;
 import com.betinsk.mc.domain.enums.EstadoPagamento;
+import com.betinsk.mc.domain.enums.Perfil;
 import com.betinsk.mc.domain.enums.TipoCliente;
 import com.betinsk.mc.repositories.CategoriaRepository;
 import com.betinsk.mc.repositories.CidadeRepository;
@@ -123,16 +124,27 @@ public class DbService {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		Cliente cli1 = new Cliente(null, "Maria Silva", "betinskpc@gmail.com", "12215568891", TipoCliente.PESSOAFISICA, be.encode("456"));
-		
+
 		cli1.getTelefones().addAll(Arrays.asList("33564321", "992120527"));
+		
+		
+		Cliente cli2 = new Cliente(null, "Ana Costa Silva", "developer@gmail.com", "54292814090", TipoCliente.PESSOAFISICA, be.encode("456"));
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.getTelefones().addAll(Arrays.asList("33564321", "992120527"));
+
 		
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38828282", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua Matos", "300", "Apto 301", "Jardim", "38828282", cli1, c2);
 		
-		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		Endereco e3 = new Endereco(null, "Rua Matos", "300", "Apto 301", "Jardim", "38828282", cli2, c2);
+
 		
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
+
+		
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm"); 
 	
