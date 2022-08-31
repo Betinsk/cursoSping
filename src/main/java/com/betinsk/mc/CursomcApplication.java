@@ -22,10 +22,6 @@ public class CursomcApplication implements CommandLineRunner {
 
 	}
 
-	
-	@Bean
-	public EmailService emailService() {
-		return new SmtpEmailService();
-	}
+
 	
 }
